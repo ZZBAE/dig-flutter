@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "category": "iOS",
+    "difficulty": "easy",
+    "question": "ARC(Automatic Reference Counting)란 무엇인가요?",
+    "keyPoints": ["참조 카운트 자동 관리", "strong/weak/unowned", "Retain Cycle 주의"],
+    "sampleAnswer": "ARC는 컴파일 타임에 참조 카운트 관리 코드를 자동으로 삽입하여 메모리를 관리하는 방식입니다. strong, weak, unowned 참조를 적절히 사용해 순환 참조를 방지해야 합니다."
+  },
+  {
+    "id": 2,
+    "category": "iOS",
+    "difficulty": "easy",
+    "question": "struct와 class의 차이를 설명해주세요.",
+    "keyPoints": ["값 타입 vs 참조 타입", "상속 여부", "mutating 키워드"],
+    "sampleAnswer": "struct는 값 타입으로 복사되고 상속이 불가하며, class는 참조 타입으로 같은 인스턴스를 공유하고 상속이 가능합니다. struct에서 프로퍼티 변경 시 mutating 키워드가 필요합니다."
+  },
+  {
+    "id": 3,
+    "category": "iOS",
+    "difficulty": "easy",
+    "question": "Optional이란 무엇인가요?",
+    "keyPoints": ["nil 가능성 표현", "안전한 언래핑", "if let / guard let"],
+    "sampleAnswer": "Optional은 값이 있을 수도, nil일 수도 있는 타입입니다. if let, guard let, 옵셔널 체이닝, nil 병합 연산자 등으로 안전하게 언래핑하여 사용합니다."
+  },
+  {
+    "id": 4,
+    "category": "iOS",
+    "difficulty": "easy",
+    "question": "AppDelegate와 SceneDelegate의 역할 차이는?",
+    "keyPoints": ["앱 생명주기 vs 씬 생명주기", "iOS 13 이후 분리", "멀티 윈도우 지원"],
+    "sampleAnswer": "AppDelegate는 앱 전체의 생명주기를 관리하고, SceneDelegate는 iOS 13부터 도입되어 각 화면(씬)의 생명주기를 관리합니다. 멀티 윈도우를 지원하기 위해 분리되었습니다."
+  },
+  {
+    "id": 5,
+    "category": "iOS",
+    "difficulty": "easy",
+    "question": "Swift에서 프로토콜(Protocol)이란 무엇인가요?",
+    "keyPoints": ["요구사항 정의", "다중 채택 가능", "프로토콜 지향 프로그래밍"],
+    "sampleAnswer": "프로토콜은 메서드, 프로퍼티 등의 요구사항을 정의하는 청사진입니다. 클래스, 구조체, 열거형이 채택하여 구현하며, 다중 채택이 가능합니다."
+  },
+  {
+    "id": 6,
+    "category": "iOS",
+    "difficulty": "easy",
+    "question": "Auto Layout이란 무엇인가요?",
+    "keyPoints": ["제약 조건 기반 레이아웃", "다양한 화면 크기 대응", "우선순위 설정"],
+    "sampleAnswer": "Auto Layout은 제약 조건(Constraints)을 기반으로 뷰의 크기와 위치를 동적으로 계산하는 레이아웃 시스템입니다. 다양한 화면 크기에 유연하게 대응할 수 있습니다."
+  },
+  {
+    "id": 7,
+    "category": "iOS",
+    "difficulty": "easy",
+    "question": "guard 문과 if 문의 차이는 무엇인가요?",
+    "keyPoints": ["조기 종료(early exit)", "가독성 향상", "바인딩 변수 스코프"],
+    "sampleAnswer": "guard 문은 조건이 false일 때 조기 종료하며, 바인딩된 변수를 이후 코드에서 사용할 수 있습니다. if let은 블록 내에서만 바인딩 변수를 사용할 수 있습니다."
+  },
+  {
+    "id": 8,
+    "category": "iOS",
+    "difficulty": "medium",
+    "question": "Retain Cycle이란 무엇이고 어떻게 해결하나요?",
+    "keyPoints": ["순환 참조로 메모리 누수", "weak/unowned 사용", "클로저 캡처 리스트"],
+    "sampleAnswer": "Retain Cycle은 두 객체가 서로를 strong 참조하여 해제되지 않는 상태입니다. weak이나 unowned 참조를 사용하거나, 클로저에서 [weak self] 캡처 리스트로 해결합니다."
+  },
+  {
+    "id": 9,
+    "category": "iOS",
+    "difficulty": "medium",
+    "question": "Swift의 클로저(Closure)를 설명해주세요.",
+    "keyPoints": ["일급 객체", "캡처 리스트", "축약 문법", "@escaping"],
+    "sampleAnswer": "클로저는 코드 블록을 변수처럼 전달할 수 있는 일급 객체입니다. 주변 컨텍스트의 변수를 캡처할 수 있으며, @escaping은 함수 종료 후에도 실행되는 클로저를 나타냅니다."
+  },
+  {
+    "id": 10,
+    "category": "iOS",
+    "difficulty": "medium",
+    "question": "UIKit의 View 생명주기를 설명해주세요.",
+    "keyPoints": ["loadView → viewDidLoad → viewWillAppear → viewDidAppear", "viewWillDisappear → viewDidDisappear", "각 단계별 적합한 작업"],
+    "sampleAnswer": "View Controller의 생명주기는 loadView, viewDidLoad, viewWillAppear, viewDidAppear, viewWillDisappear, viewDidDisappear 순으로 호출됩니다. 초기 설정은 viewDidLoad, 화면 표시 관련은 viewWillAppear에서 처리합니다."
+  },
+  {
+    "id": 11,
+    "category": "iOS",
+    "difficulty": "medium",
+    "question": "GCD(Grand Central Dispatch)란 무엇인가요?",
+    "keyPoints": ["멀티스레딩 관리", "DispatchQueue(main/global)", "sync/async"],
+    "sampleAnswer": "GCD는 iOS에서 멀티스레딩을 관리하는 API입니다. DispatchQueue.main은 UI 작업, DispatchQueue.global은 백그라운드 작업에 사용하며, sync와 async로 실행 방식을 결정합니다."
+  },
+  {
+    "id": 12,
+    "category": "iOS",
+    "difficulty": "medium",
+    "question": "Delegate 패턴이란 무엇인가요?",
+    "keyPoints": ["프로토콜 기반 위임", "1:1 통신", "UITableViewDelegate 예시"],
+    "sampleAnswer": "Delegate 패턴은 객체가 자신의 일부 역할을 다른 객체에게 위임하는 디자인 패턴입니다. 프로토콜로 정의하며 UITableViewDelegate처럼 이벤트 처리를 위임합니다."
+  },
+  {
+    "id": 13,
+    "category": "iOS",
+    "difficulty": "medium",
+    "question": "Core Data란 무엇인가요?",
+    "keyPoints": ["객체 그래프 관리 프레임워크", "영구 저장소", "NSManagedObjectContext"],
+    "sampleAnswer": "Core Data는 Apple의 객체 그래프 및 영구 저장 프레임워크입니다. NSManagedObjectContext를 통해 데이터를 CRUD하며, SQLite를 기본 저장소로 사용합니다."
+  },
+  {
+    "id": 14,
+    "category": "iOS",
+    "difficulty": "medium",
+    "question": "MVVM 패턴이란 무엇인가요?",
+    "keyPoints": ["Model-View-ViewModel", "데이터 바인딩", "테스트 용이성"],
+    "sampleAnswer": "MVVM은 Model(데이터), View(UI), ViewModel(비즈니스 로직)으로 분리하는 아키텍처 패턴입니다. ViewModel이 Model과 View를 연결하며, 데이터 바인딩으로 UI를 자동 갱신합니다."
+  },
+  {
+    "id": 15,
+    "category": "iOS",
+    "difficulty": "hard",
+    "question": "Swift Concurrency(async/await)를 설명해주세요.",
+    "keyPoints": ["구조적 동시성", "Task/TaskGroup", "Actor로 데이터 경쟁 방지"],
+    "sampleAnswer": "Swift Concurrency는 async/await 키워드로 비동기 코드를 동기처럼 작성할 수 있게 합니다. Task로 비동기 작업을 생성하고, Actor로 데이터 경쟁을 컴파일 타임에 방지합니다."
+  },
+  {
+    "id": 16,
+    "category": "iOS",
+    "difficulty": "hard",
+    "question": "SwiftUI와 UIKit의 차이를 설명해주세요.",
+    "keyPoints": ["선언형 vs 명령형", "상태 관리(@State, @Binding)", "프리뷰 지원"],
+    "sampleAnswer": "SwiftUI는 선언형 UI 프레임워크로 상태 변화에 따라 자동으로 UI가 갱신됩니다. UIKit은 명령형으로 직접 UI를 조작합니다. SwiftUI는 @State, @Binding 등으로 상태를 관리합니다."
+  },
+  {
+    "id": 17,
+    "category": "iOS",
+    "difficulty": "hard",
+    "question": "Combine 프레임워크란 무엇인가요?",
+    "keyPoints": ["Publisher/Subscriber 패턴", "선언형 비동기 처리", "Operator 체이닝"],
+    "sampleAnswer": "Combine은 Apple의 반응형 프로그래밍 프레임워크입니다. Publisher가 값을 방출하고 Subscriber가 수신하며, map, filter 등의 Operator로 데이터 스트림을 변환합니다."
+  },
+  {
+    "id": 18,
+    "category": "iOS",
+    "difficulty": "hard",
+    "question": "앱이 백그라운드에서 실행될 수 있는 경우를 설명해주세요.",
+    "keyPoints": ["Background Modes", "Background Task", "Silent Push Notification"],
+    "sampleAnswer": "앱은 Background Modes(오디오, 위치, VoIP 등), BGTaskScheduler를 통한 백그라운드 작업, Silent Push Notification 등의 방법으로 백그라운드에서 실행될 수 있습니다."
+  },
+  {
+    "id": 19,
+    "category": "iOS",
+    "difficulty": "hard",
+    "question": "메모리 구조에서 Stack과 Heap의 차이는?",
+    "keyPoints": ["값 타입은 Stack, 참조 타입은 Heap", "Stack은 빠르고 자동 해제", "Heap은 ARC로 관리"],
+    "sampleAnswer": "Stack은 값 타입(struct, enum)이 저장되며 LIFO로 자동 해제되어 빠릅니다. Heap은 참조 타입(class)이 저장되며 ARC로 관리되고, 할당/해제 비용이 더 큽니다."
+  },
+  {
+    "id": 20,
+    "category": "iOS",
+    "difficulty": "hard",
+    "question": "Clean Architecture를 iOS에서 어떻게 적용하나요?",
+    "keyPoints": ["Domain/Data/Presentation 레이어 분리", "의존성 역전 원칙", "UseCase 패턴"],
+    "sampleAnswer": "Clean Architecture는 Domain(엔티티, UseCase), Data(Repository 구현, 데이터 소스), Presentation(ViewModel, View) 레이어로 분리합니다. 의존성은 안쪽(Domain)으로 향하며 프로토콜로 역전시킵니다."
+  }
+]

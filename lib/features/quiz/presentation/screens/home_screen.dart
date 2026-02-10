@@ -14,31 +14,49 @@ class HomeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 12),
             const Text(
-              '랜덤 질문으로 답변 연습하고\n키포인트로 반복 학습하세요.',
+              '카테고리를 선택하고\n면접 질문에 답변해보세요.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 24),
-            _MenuButton(
-              title: '랜덤 질문 시작',
-              subtitle: 'CS 중심 + Flutter/iOS 보조',
-              onTap: () => Navigator.pushNamed(context, AppRoutes.quiz),
+            _CategoryCard(
+              title: 'CS',
+              subtitle: '운영체제, 네트워크, 자료구조, DB',
+              icon: Icons.computer,
+              color: Colors.blue,
+              onTap: () => Navigator.pushNamed(
+                context,
+                AppRoutes.quiz,
+                arguments: 'CS',
+              ),
             ),
             const SizedBox(height: 12),
-            _MenuButton(
-              title: '오답노트',
-              subtitle: '다시 볼 문제 모아보기',
-              onTap: () => Navigator.pushNamed(context, AppRoutes.retry),
+            _CategoryCard(
+              title: 'iOS',
+              subtitle: 'Swift, UIKit, SwiftUI, 메모리 관리',
+              icon: Icons.phone_iphone,
+              color: Colors.orange,
+              onTap: () => Navigator.pushNamed(
+                context,
+                AppRoutes.quiz,
+                arguments: 'iOS',
+              ),
             ),
             const SizedBox(height: 12),
-            _MenuButton(
-              title: '즐겨찾기',
-              subtitle: '자주 보는 질문 저장',
-              onTap: () => Navigator.pushNamed(context, AppRoutes.favorites),
+            _CategoryCard(
+              title: 'Flutter',
+              subtitle: 'Widget, 상태관리, Dart, 렌더링',
+              icon: Icons.flutter_dash,
+              color: Colors.teal,
+              onTap: () => Navigator.pushNamed(
+                context,
+                AppRoutes.quiz,
+                arguments: 'Flutter',
+              ),
             ),
             const Spacer(),
             const Text(
-              'v0.1 • Local JSON 기반 (추후 Hive/Railway 확장)',
+              'v0.2 • 카테고리별 20문제 (총 60문제)',
               style: TextStyle(fontSize: 12, color: Colors.black54),
             ),
           ],
@@ -48,14 +66,18 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _MenuButton extends StatelessWidget {
+class _CategoryCard extends StatelessWidget {
   final String title;
   final String subtitle;
+  final IconData icon;
+  final Color color;
   final VoidCallback onTap;
 
-  const _MenuButton({
+  const _CategoryCard({
     required this.title,
     required this.subtitle,
+    required this.icon,
+    required this.color,
     required this.onTap,
   });
 
@@ -72,7 +94,15 @@ class _MenuButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Icon(Icons.fitness_center),
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: color),
+            ),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -88,7 +118,12 @@ class _MenuButton extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right),
+            Text(
+              '20문제',
+              style: TextStyle(fontSize: 12, color: Colors.black38),
+            ),
+            const SizedBox(width: 4),
+            const Icon(Icons.chevron_right, color: Colors.black38),
           ],
         ),
       ),

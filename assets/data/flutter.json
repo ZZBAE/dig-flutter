@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "category": "Flutter",
+    "difficulty": "easy",
+    "question": "StatelessWidget과 StatefulWidget의 차이는?",
+    "keyPoints": ["상태 유무", "build 호출 시점", "setState"],
+    "sampleAnswer": "StatelessWidget은 상태가 없어 한 번 빌드되면 변하지 않고, StatefulWidget은 State 객체를 가져 setState 호출 시 UI를 재빌드합니다."
+  },
+  {
+    "id": 2,
+    "category": "Flutter",
+    "difficulty": "easy",
+    "question": "Hot Reload와 Hot Restart의 차이는?",
+    "keyPoints": ["상태 유지 여부", "빌드 속도", "사용 시점"],
+    "sampleAnswer": "Hot Reload는 변경된 코드만 반영하며 앱 상태를 유지합니다. Hot Restart는 앱을 처음부터 다시 시작하여 상태가 초기화됩니다."
+  },
+  {
+    "id": 3,
+    "category": "Flutter",
+    "difficulty": "easy",
+    "question": "Widget, Element, RenderObject의 관계를 설명해주세요.",
+    "keyPoints": ["Widget은 설정(불변)", "Element는 트리 내 위치", "RenderObject는 실제 렌더링"],
+    "sampleAnswer": "Widget은 UI의 불변 설정이고, Element는 Widget의 인스턴스로 트리 내 위치를 관리하며, RenderObject는 실제 레이아웃과 페인팅을 담당합니다."
+  },
+  {
+    "id": 4,
+    "category": "Flutter",
+    "difficulty": "easy",
+    "question": "BuildContext란 무엇인가요?",
+    "keyPoints": ["위젯 트리 내 위치 참조", "Theme/MediaQuery 접근", "of(context) 패턴"],
+    "sampleAnswer": "BuildContext는 위젯 트리에서 현재 위젯의 위치를 나타내는 핸들입니다. Theme.of(context), MediaQuery.of(context) 등으로 상위 위젯의 데이터에 접근할 수 있습니다."
+  },
+  {
+    "id": 5,
+    "category": "Flutter",
+    "difficulty": "easy",
+    "question": "pubspec.yaml 파일의 역할은 무엇인가요?",
+    "keyPoints": ["프로젝트 메타데이터", "의존성 관리", "에셋 등록"],
+    "sampleAnswer": "pubspec.yaml은 Flutter 프로젝트의 설정 파일로, 앱 이름/버전, 외부 패키지 의존성, 에셋 경로 등을 정의합니다."
+  },
+  {
+    "id": 6,
+    "category": "Flutter",
+    "difficulty": "easy",
+    "question": "MaterialApp과 CupertinoApp의 차이는?",
+    "keyPoints": ["Material Design vs iOS 스타일", "테마 시스템", "플랫폼별 UI"],
+    "sampleAnswer": "MaterialApp은 Google의 Material Design을, CupertinoApp은 Apple의 iOS 디자인을 따릅니다. 각각 다른 테마 시스템과 위젯을 제공합니다."
+  },
+  {
+    "id": 7,
+    "category": "Flutter",
+    "difficulty": "easy",
+    "question": "Navigator와 라우팅의 기본 개념을 설명해주세요.",
+    "keyPoints": ["스택 기반 화면 관리", "push/pop", "Named Route"],
+    "sampleAnswer": "Navigator는 스택 구조로 화면을 관리합니다. push로 새 화면을 추가하고 pop으로 이전 화면으로 돌아갑니다. Named Route로 문자열 기반 라우팅도 가능합니다."
+  },
+  {
+    "id": 8,
+    "category": "Flutter",
+    "difficulty": "medium",
+    "question": "Flutter에서 상태 관리가 왜 필요한가요?",
+    "keyPoints": ["UI와 데이터 동기화", "위젯 트리 간 데이터 공유", "리빌드 최적화"],
+    "sampleAnswer": "상태 관리는 UI와 데이터의 일관성을 유지하고, 위젯 트리의 다른 위치에서 동일한 데이터에 접근하며, 불필요한 리빌드를 최소화하기 위해 필요합니다."
+  },
+  {
+    "id": 9,
+    "category": "Flutter",
+    "difficulty": "medium",
+    "question": "Provider의 동작 원리를 설명해주세요.",
+    "keyPoints": ["InheritedWidget 래핑", "ChangeNotifier", "Consumer/Selector"],
+    "sampleAnswer": "Provider는 InheritedWidget을 래핑한 상태 관리 라이브러리입니다. ChangeNotifier로 상태 변화를 알리고, Consumer나 Selector로 필요한 위젯만 리빌드합니다."
+  },
+  {
+    "id": 10,
+    "category": "Flutter",
+    "difficulty": "medium",
+    "question": "Key가 왜 필요한가요?",
+    "keyPoints": ["위젯 식별", "리스트 아이템 재사용", "GlobalKey vs ValueKey"],
+    "sampleAnswer": "Key는 Flutter가 위젯 트리에서 위젯을 고유하게 식별하는 데 사용됩니다. 리스트에서 아이템 순서가 변경될 때 올바른 상태를 유지하려면 Key가 필요합니다."
+  },
+  {
+    "id": 11,
+    "category": "Flutter",
+    "difficulty": "medium",
+    "question": "FutureBuilder와 StreamBuilder의 차이는?",
+    "keyPoints": ["단일 비동기 결과 vs 연속 데이터 스트림", "snapshot 상태 처리", "사용 사례"],
+    "sampleAnswer": "FutureBuilder는 Future의 단일 결과를 기다려 UI를 빌드하고, StreamBuilder는 Stream의 연속적인 데이터를 실시간으로 반영합니다. 둘 다 AsyncSnapshot으로 상태를 처리합니다."
+  },
+  {
+    "id": 12,
+    "category": "Flutter",
+    "difficulty": "medium",
+    "question": "Dart에서 Isolate란 무엇인가요?",
+    "keyPoints": ["독립된 메모리 공간", "메시지 패싱 통신", "무거운 연산 분리"],
+    "sampleAnswer": "Isolate는 독립된 메모리 공간을 가진 실행 단위입니다. 메인 Isolate와 메시지 패싱으로 통신하며, CPU 집약적인 작업을 별도 Isolate에서 실행하여 UI 버벅임을 방지합니다."
+  },
+  {
+    "id": 13,
+    "category": "Flutter",
+    "difficulty": "medium",
+    "question": "Flutter의 렌더링 파이프라인을 설명해주세요.",
+    "keyPoints": ["Build → Layout → Paint → Composite", "60fps 목표", "위젯 리빌드 최적화"],
+    "sampleAnswer": "Flutter는 Build(위젯 트리 구성), Layout(크기/위치 계산), Paint(화면 그리기), Composite(GPU 합성) 단계로 렌더링합니다. 16ms 내에 완료하여 60fps를 유지합니다."
+  },
+  {
+    "id": 14,
+    "category": "Flutter",
+    "difficulty": "medium",
+    "question": "const 생성자의 장점은 무엇인가요?",
+    "keyPoints": ["컴파일 타임 상수", "위젯 리빌드 방지", "메모리 효율"],
+    "sampleAnswer": "const 생성자로 만든 위젯은 컴파일 타임에 생성되어 동일한 인스턴스를 재사용합니다. 불필요한 리빌드를 방지하고 메모리를 절약합니다."
+  },
+  {
+    "id": 15,
+    "category": "Flutter",
+    "difficulty": "hard",
+    "question": "Riverpod과 Provider의 차이는 무엇인가요?",
+    "keyPoints": ["BuildContext 불필요", "컴파일 타임 안전성", "Provider 스코프 유연성"],
+    "sampleAnswer": "Riverpod은 Provider의 한계를 개선한 라이브러리로, BuildContext 없이 상태에 접근 가능하며 컴파일 타임에 에러를 감지합니다. Provider 조합과 오버라이드가 더 유연합니다."
+  },
+  {
+    "id": 16,
+    "category": "Flutter",
+    "difficulty": "hard",
+    "question": "Platform Channel이란 무엇인가요?",
+    "keyPoints": ["네이티브 코드 통신", "MethodChannel/EventChannel", "코덱 직렬화"],
+    "sampleAnswer": "Platform Channel은 Flutter와 네이티브(Android/iOS) 코드 간 통신 방법입니다. MethodChannel로 메서드 호출, EventChannel로 이벤트 스트림을 주고받으며, 표준 메시지 코덱으로 직렬화합니다."
+  },
+  {
+    "id": 17,
+    "category": "Flutter",
+    "difficulty": "hard",
+    "question": "Flutter에서 성능 최적화 방법을 설명해주세요.",
+    "keyPoints": ["const 위젯 활용", "ListView.builder 사용", "RepaintBoundary", "DevTools 프로파일링"],
+    "sampleAnswer": "const 위젯으로 리빌드 방지, ListView.builder로 지연 로딩, RepaintBoundary로 페인트 영역 분리, Flutter DevTools로 프로파일링하여 병목을 찾고 최적화합니다."
+  },
+  {
+    "id": 18,
+    "category": "Flutter",
+    "difficulty": "hard",
+    "question": "GoRouter의 장점과 사용법을 설명해주세요.",
+    "keyPoints": ["선언형 라우팅", "딥링크 지원", "리다이렉트/가드"],
+    "sampleAnswer": "GoRouter는 선언형 라우팅 라이브러리로, URL 기반 라우팅과 딥링크를 쉽게 처리합니다. redirect로 인증 가드를 구현하고, ShellRoute로 탭 네비게이션을 지원합니다."
+  },
+  {
+    "id": 19,
+    "category": "Flutter",
+    "difficulty": "hard",
+    "question": "Flutter 앱의 테스트 종류를 설명해주세요.",
+    "keyPoints": ["Unit Test / Widget Test / Integration Test", "테스트 피라미드", "Mockito 활용"],
+    "sampleAnswer": "Unit Test는 함수/클래스 단위, Widget Test는 개별 위젯 동작, Integration Test는 전체 앱 흐름을 테스트합니다. 아래에서 위로 갈수록 비용이 커지므로 Unit Test를 가장 많이 작성합니다."
+  },
+  {
+    "id": 20,
+    "category": "Flutter",
+    "difficulty": "hard",
+    "question": "Bloc 패턴의 핵심 개념을 설명해주세요.",
+    "keyPoints": ["Event → Bloc → State", "단방향 데이터 흐름", "비즈니스 로직 분리"],
+    "sampleAnswer": "Bloc 패턴은 Event를 입력받아 비즈니스 로직을 처리하고 State를 출력하는 단방향 데이터 흐름 패턴입니다. UI와 비즈니스 로직을 완전히 분리하여 테스트 용이성을 높입니다."
+  }
+]

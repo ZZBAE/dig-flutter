@@ -17,7 +17,10 @@ class AppRouter {
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case AppRoutes.quiz:
-        return MaterialPageRoute(builder: (_) => const QuizScreen());
+        return MaterialPageRoute(
+          builder: (_) => const QuizScreen(),
+          settings: settings,
+        );
       case AppRoutes.favorites:
         return MaterialPageRoute(builder: (_) => const FavoritesScreen());
       case AppRoutes.retry:

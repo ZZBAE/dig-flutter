@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "프로세스와 스레드의 차이를 설명해보세요.",
+    "keyPoints": ["프로세스는 독립된 메모리 공간", "스레드는 프로세스 내 자원 공유", "컨텍스트 스위칭 비용 차이"],
+    "sampleAnswer": "프로세스는 독립적인 메모리 공간을 가지는 실행 단위이고, 스레드는 하나의 프로세스 내부에서 메모리를 공유하는 실행 단위입니다. 스레드는 프로세스보다 생성과 전환 비용이 적습니다."
+  },
+  {
+    "id": 2,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "HTTP와 HTTPS의 차이는 무엇인가요?",
+    "keyPoints": ["TLS/SSL 암호화", "데이터 기밀성", "인증서 기반 신뢰"],
+    "sampleAnswer": "HTTPS는 HTTP에 TLS/SSL 암호화 계층을 추가하여 데이터의 기밀성과 무결성을 보장합니다. 서버 인증서를 통해 신뢰성도 확보합니다."
+  },
+  {
+    "id": 3,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "스택(Stack)과 큐(Queue)의 차이를 설명해주세요.",
+    "keyPoints": ["LIFO vs FIFO", "push/pop vs enqueue/dequeue", "사용 사례"],
+    "sampleAnswer": "스택은 LIFO(후입선출) 구조로 마지막에 넣은 데이터가 먼저 나오고, 큐는 FIFO(선입선출) 구조로 먼저 넣은 데이터가 먼저 나옵니다."
+  },
+  {
+    "id": 4,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "배열(Array)과 연결 리스트(Linked List)의 차이는?",
+    "keyPoints": ["메모리 연속 할당 vs 노드 연결", "인덱스 접근 O(1) vs O(n)", "삽입/삭제 성능 차이"],
+    "sampleAnswer": "배열은 연속된 메모리에 저장되어 인덱스 접근이 O(1)이지만 삽입/삭제가 느립니다. 연결 리스트는 노드가 포인터로 연결되어 삽입/삭제가 O(1)이지만 탐색이 O(n)입니다."
+  },
+  {
+    "id": 5,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "TCP와 UDP의 차이를 설명해주세요.",
+    "keyPoints": ["연결 지향 vs 비연결", "신뢰성 보장 여부", "속도 차이"],
+    "sampleAnswer": "TCP는 연결 지향적이며 3-way handshake로 신뢰성을 보장하지만 느립니다. UDP는 비연결 방식으로 빠르지만 패킷 손실을 보장하지 않습니다."
+  },
+  {
+    "id": 6,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "해시 테이블(Hash Table)이란 무엇인가요?",
+    "keyPoints": ["키-값 쌍 저장", "해시 함수", "충돌 처리"],
+    "sampleAnswer": "해시 테이블은 해시 함수를 사용해 키를 인덱스로 변환하여 값을 저장하는 자료구조입니다. 평균 O(1)의 조회 성능을 가지며, 충돌 시 체이닝이나 오픈 어드레싱으로 처리합니다."
+  },
+  {
+    "id": 7,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "REST API란 무엇인가요?",
+    "keyPoints": ["HTTP 메서드 활용", "무상태성", "자원 기반 URI 설계"],
+    "sampleAnswer": "REST API는 HTTP 메서드(GET, POST, PUT, DELETE)를 사용하여 자원을 URI로 표현하고 조작하는 아키텍처 스타일입니다. 무상태성을 원칙으로 합니다."
+  },
+  {
+    "id": 8,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "데드락이 발생하는 4가지 조건은 무엇인가요?",
+    "keyPoints": ["상호 배제", "점유와 대기", "비선점", "순환 대기"],
+    "sampleAnswer": "데드락은 상호 배제, 점유와 대기, 비선점, 순환 대기 4가지 조건이 모두 만족될 때 발생합니다. 이 중 하나라도 깨면 데드락을 방지할 수 있습니다."
+  },
+  {
+    "id": 9,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "시간복잡도 Big-O 표기법이란 무엇인가요?",
+    "keyPoints": ["입력 크기 대비 성능", "최악의 경우 분석", "대표적 복잡도 비교"],
+    "sampleAnswer": "Big-O 표기법은 알고리즘의 입력 크기에 따른 최악의 실행 시간을 나타내는 방법입니다. O(1), O(log n), O(n), O(n log n), O(n²) 등으로 표현합니다."
+  },
+  {
+    "id": 10,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "이진 탐색(Binary Search)의 원리를 설명해주세요.",
+    "keyPoints": ["정렬된 배열 필수", "중간값 비교", "O(log n) 시간복잡도"],
+    "sampleAnswer": "이진 탐색은 정렬된 배열에서 중간값과 비교하여 탐색 범위를 절반씩 줄여나가는 알고리즘입니다. 시간복잡도는 O(log n)입니다."
+  },
+  {
+    "id": 11,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "캐시(Cache)란 무엇이고 왜 사용하나요?",
+    "keyPoints": ["자주 접근하는 데이터 임시 저장", "지역성 원리", "속도 향상"],
+    "sampleAnswer": "캐시는 자주 사용하는 데이터를 빠른 저장소에 임시 보관하여 접근 속도를 향상시키는 기법입니다. 시간적/공간적 지역성 원리를 기반으로 동작합니다."
+  },
+  {
+    "id": 12,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "동기(Synchronous)와 비동기(Asynchronous)의 차이는?",
+    "keyPoints": ["작업 완료 대기 여부", "블로킹 vs 논블로킹", "콜백/Promise/async-await"],
+    "sampleAnswer": "동기는 작업이 완료될 때까지 기다린 후 다음 작업을 수행하고, 비동기는 작업 완료를 기다리지 않고 다음 작업을 진행합니다. 비동기는 콜백, Promise, async/await 등으로 결과를 처리합니다."
+  },
+  {
+    "id": 13,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "정규화(Normalization)란 무엇인가요?",
+    "keyPoints": ["데이터 중복 최소화", "이상 현상 방지", "1NF/2NF/3NF"],
+    "sampleAnswer": "정규화는 관계형 데이터베이스에서 데이터 중복을 최소화하고 삽입/갱신/삭제 이상을 방지하기 위해 테이블을 분리하는 과정입니다."
+  },
+  {
+    "id": 14,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "OOP의 4대 특성을 설명해주세요.",
+    "keyPoints": ["캡슐화", "상속", "다형성", "추상화"],
+    "sampleAnswer": "OOP의 4대 특성은 캡슐화(데이터 은닉), 상속(코드 재사용), 다형성(같은 인터페이스 다른 동작), 추상화(복잡성 숨김)입니다."
+  },
+  {
+    "id": 15,
+    "category": "CS",
+    "difficulty": "hard",
+    "question": "가상 메모리란 무엇인가요?",
+    "keyPoints": ["논리 주소와 물리 주소 분리", "페이징/세그멘테이션", "페이지 폴트"],
+    "sampleAnswer": "가상 메모리는 물리 메모리보다 큰 주소 공간을 제공하기 위해 디스크를 보조 저장소로 활용하는 메모리 관리 기법입니다. 페이징을 통해 논리 주소를 물리 주소로 매핑합니다."
+  },
+  {
+    "id": 16,
+    "category": "CS",
+    "difficulty": "hard",
+    "question": "트랜잭션의 ACID 특성을 설명해주세요.",
+    "keyPoints": ["Atomicity(원자성)", "Consistency(일관성)", "Isolation(고립성)", "Durability(지속성)"],
+    "sampleAnswer": "ACID는 원자성(전부 성공 또는 전부 실패), 일관성(트랜잭션 전후 데이터 무결성 보장), 고립성(동시 트랜잭션 간 간섭 방지), 지속성(완료된 트랜잭션 영구 반영)을 의미합니다."
+  },
+  {
+    "id": 17,
+    "category": "CS",
+    "difficulty": "hard",
+    "question": "인덱스(Index)의 원리와 장단점을 설명해주세요.",
+    "keyPoints": ["B-Tree 구조", "조회 성능 향상", "쓰기 성능 저하"],
+    "sampleAnswer": "인덱스는 B-Tree 등의 자료구조로 데이터의 위치를 빠르게 찾을 수 있게 합니다. 조회 성능은 향상되지만, 삽입/수정/삭제 시 인덱스도 갱신해야 하므로 쓰기 성능이 저하됩니다."
+  },
+  {
+    "id": 18,
+    "category": "CS",
+    "difficulty": "hard",
+    "question": "OSI 7계층을 설명해주세요.",
+    "keyPoints": ["물리/데이터링크/네트워크/전송/세션/표현/응용", "각 계층의 역할", "TCP/IP와의 관계"],
+    "sampleAnswer": "OSI 7계층은 물리(비트 전송), 데이터링크(프레임), 네트워크(라우팅), 전송(TCP/UDP), 세션(연결 관리), 표현(암호화/압축), 응용(HTTP 등) 계층으로 구성됩니다."
+  },
+  {
+    "id": 19,
+    "category": "CS",
+    "difficulty": "hard",
+    "question": "CAP 정리(CAP Theorem)란 무엇인가요?",
+    "keyPoints": ["Consistency/Availability/Partition Tolerance", "3가지 중 2가지만 보장", "분산 시스템 설계"],
+    "sampleAnswer": "CAP 정리는 분산 시스템에서 일관성(C), 가용성(A), 분할 내성(P) 중 최대 2가지만 동시에 보장할 수 있다는 이론입니다. 네트워크 분할은 피할 수 없으므로 보통 CP 또는 AP 중 선택합니다."
+  },
+  {
+    "id": 20,
+    "category": "CS",
+    "difficulty": "hard",
+    "question": "동시성(Concurrency)과 병렬성(Parallelism)의 차이는?",
+    "keyPoints": ["논리적 동시 실행 vs 물리적 동시 실행", "싱글코어 vs 멀티코어", "컨텍스트 스위칭"],
+    "sampleAnswer": "동시성은 여러 작업이 논리적으로 동시에 진행되는 것으로 싱글코어에서도 가능하며, 병렬성은 실제로 여러 코어에서 물리적으로 동시에 실행되는 것입니다."
+  }
+]
