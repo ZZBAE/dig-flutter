@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../data/sources/local_question_source.dart';
 import '../../data/models/question.dart';
+import '../../data/models/quiz_result.dart';
+import 'result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -10,15 +12,16 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  Question? _question;
-  final _source = LocalQuestionSource();
+  List<Question> _questions = [];
+  int _currentIndex = 0;
   final _answerController = TextEditingController();
-  bool _showAnswer = false;
+  final List<QuizResult> _results = [];
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _loadQuestion();
+    _loadQuestions();
   }
 
   @override
@@ -27,147 +30,154 @@ class _QuizScreenState extends State<QuizScreen> {
     super.dispose();
   }
 
-  Future<void> _loadQuestion() async {
-    final q = await _source.getRandomQuestion();
+  Future<void> _loadQuestions() async {
+    final questions = await LocalQuestionSource().getAllQuestions();
     setState(() {
-      _question = q;
-      _answerController.clear();
-      _showAnswer = false;
+      _questions = questions;
+      _isLoading = false;
     });
+  }
+
+  void _submitAnswer() {
+    final answer = _answerController.text.trim();
+
+    _results.add(QuizResult(
+      question: _questions[_currentIndex],
+      userAnswer: answer.isEmpty ? '(미작성)' : answer,
+    ));
+
+    if (_currentIndex < _questions.length - 1) {
+      setState(() {
+        _currentIndex++;
+        _answerController.clear();
+      });
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ResultScreen(results: _results),
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    final question = _questions[_currentIndex];
+
     return Scaffold(
-      appBar: AppBar(title: const Text('랜덤 질문')),
-      body: _question == null
-          ? const Center(child: CircularProgressIndicator())
-          : GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _question!.category,
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.black54),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      _question!.question,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 24),
-
-                    // 답변 입력칸
-                    TextField(
-                      controller: _answerController,
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        hintText: '여기에 답변을 작성해보세요...',
-                        hintStyle: const TextStyle(color: Colors.black38),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                              color: Colors.black87, width: 1.5),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-
-                    // 정답 보기 버튼
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () {
-                          setState(() {
-                            _showAnswer = !_showAnswer;
-                          });
-                        },
-                        icon: Icon(
-                          _showAnswer ? Icons.visibility_off : Icons.visibility,
-                          size: 18,
-                        ),
-                        label: Text(_showAnswer ? '정답 숨기기' : '정답 보기'),
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    // 정답 영역
-                    if (_showAnswer) ...[
-                      const SizedBox(height: 16),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              '📌 키포인트',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w700),
-                            ),
-                            const SizedBox(height: 8),
-                            ...(_question!.keyPoints.map(
-                              (point) => Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Text(
-                                  '• $point',
-                                  style: const TextStyle(fontSize: 14),
-                                ),
-                              ),
-                            )),
-                            const SizedBox(height: 12),
-                            const Text(
-                              '✅ 모범 답안',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w700),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              _question!.sampleAnswer,
-                              style: const TextStyle(fontSize: 14, height: 1.5),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-
-                    const SizedBox(height: 24),
-
-                    // 다음 질문 버튼
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _loadQuestion,
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        child: const Text('다음 질문'),
-                      ),
-                    ),
-                  ],
+      appBar: AppBar(
+        title: Text('질문 ${_currentIndex + 1} / ${_questions.length}'),
+      ),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 진행률 바
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(
+                  value: (_currentIndex + 1) / _questions.length,
+                  minHeight: 6,
+                  backgroundColor: Colors.grey.shade200,
+                  valueColor:
+                      const AlwaysStoppedAnimation<Color>(Colors.black87),
                 ),
               ),
-            ),
+              const SizedBox(height: 20),
+
+              // 카테고리 + 난이도
+              Row(
+                children: [
+                  _Tag(label: question.category),
+                  const SizedBox(width: 8),
+                  _Tag(label: question.difficulty),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // 질문
+              Text(
+                question.question,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 24),
+
+              // 답변 입력칸
+              TextField(
+                controller: _answerController,
+                maxLines: 6,
+                decoration: InputDecoration(
+                  hintText: '여기에 답변을 작성해보세요...',
+                  hintStyle: const TextStyle(color: Colors.black38),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide:
+                        const BorderSide(color: Colors.black87, width: 1.5),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // 제출 버튼
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _submitAnswer,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black87,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    _currentIndex < _questions.length - 1
+                        ? '제출 후 다음 질문'
+                        : '제출 후 결과 보기',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Tag extends StatelessWidget {
+  final String label;
+  const _Tag({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(fontSize: 12, color: Colors.black54),
+      ),
     );
   }
 }

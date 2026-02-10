@@ -4,15 +4,17 @@ import 'package:flutter/services.dart';
 import '../models/question.dart';
 
 class LocalQuestionSource {
-  Future<Question> getRandomQuestion() async {
+  Future<List<Question>> getAllQuestions() async {
     final jsonString =
         await rootBundle.loadString('assets/data/questions.json');
-
     final List<dynamic> jsonList = json.decode(jsonString);
+    final questions = jsonList.map((e) => Question.fromJson(e)).toList();
+    questions.shuffle(Random());
+    return questions;
+  }
 
-    final List<Question> questions =
-        jsonList.map((e) => Question.fromJson(e)).toList();
-
+  Future<Question> getRandomQuestion() async {
+    final questions = await getAllQuestions();
     final randomIndex = Random().nextInt(questions.length);
     return questions[randomIndex];
   }
