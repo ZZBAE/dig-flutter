@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "프로세스와 스레드의 차이를 설명해보세요.",
+    "keyPoints": [
+      "프로세스는 독립된 메모리 공간",
+      "스레드는 프로세스 내 자원 공유",
+      "컨텍스트 스위칭 비용 차이"
+    ],
+    "sampleAnswer": "프로세스는 독립적인 메모리 공간을 가지는 실행 단위이고, 스레드는 하나의 프로세스 내부에서 메모리를 공유하는 실행 단위입니다. 스레드는 프로세스보다 생성과 전환 비용이 적습니다."
+  },
+  {
+    "id": 2,
+    "category": "CS",
+    "difficulty": "easy",
+    "question": "HTTP와 HTTPS의 차이는 무엇인가요?",
+    "keyPoints": [
+      "TLS/SSL",
+      "암호화",
+      "인증서"
+    ],
+    "sampleAnswer": "HTTPS는 HTTP에 TLS/SSL 암호화 계층을 추가해 데이터의 기밀성과 무결성을 보장합니다."
+  },
+  {
+    "id": 3,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "데드락이 발생하는 4가지 조건은 무엇인가요?",
+    "keyPoints": [
+      "상호 배제",
+      "점유와 대기",
+      "비선점",
+      "순환 대기"
+    ],
+    "sampleAnswer": "데드락은 상호 배제, 점유와 대기, 비선점, 순환 대기 조건이 모두 만족될 때 발생합니다."
+  },
+  {
+    "id": 4,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "시간복잡도 Big-O 표기법이란 무엇인가요?",
+    "keyPoints": [
+      "입력 크기",
+      "최악의 경우",
+      "성능 비교"
+    ],
+    "sampleAnswer": "Big-O 표기법은 입력 크기에 따른 알고리즘의 최악 시간복잡도를 나타내는 방법입니다."
+  },
+  {
+    "id": 5,
+    "category": "CS",
+    "difficulty": "medium",
+    "question": "TCP와 UDP의 차이를 설명해주세요.",
+    "keyPoints": [
+      "연결 지향",
+      "신뢰성",
+      "속도"
+    ],
+    "sampleAnswer": "TCP는 연결 지향적이며 신뢰성을 보장하지만 느리고, UDP는 비연결 방식으로 빠르지만 신뢰성을 보장하지 않습니다."
+  },
+  {
+    "id": 6,
+    "category": "Flutter",
+    "difficulty": "easy",
+    "question": "Flutter에서 StatelessWidget과 StatefulWidget의 차이는?",
+    "keyPoints": [
+      "상태 관리",
+      "build 호출"
+    ],
+    "sampleAnswer": "StatelessWidget은 상태가 없고, StatefulWidget은 상태를 가지고 setState로 UI를 갱신합니다."
+  },
+  {
+    "id": 7,
+    "category": "Flutter",
+    "difficulty": "medium",
+    "question": "Flutter에서 상태 관리는 왜 필요한가요?",
+    "keyPoints": [
+      "UI 갱신",
+      "데이터 흐름",
+      "유지보수"
+    ],
+    "sampleAnswer": "상태 관리는 UI와 데이터의 일관성을 유지하고 복잡한 화면 갱신을 효율적으로 처리하기 위해 필요합니다."
+  },
+  {
+    "id": 8,
+    "category": "iOS",
+    "difficulty": "medium",
+    "question": "ARC란 무엇인가요?",
+    "keyPoints": [
+      "참조 카운트",
+      "메모리 관리",
+      "Retain Cycle"
+    ],
+    "sampleAnswer": "ARC는 객체의 참조 카운트를 자동으로 관리해 메모리를 해제하는 iOS 메모리 관리 방식입니다."
+  },
+  {
+    "id": 9,
+    "category": "CS",
+    "difficulty": "hard",
+    "question": "가상 메모리란 무엇인가요?",
+    "keyPoints": [
+      "논리 주소",
+      "물리 메모리",
+      "페이징"
+    ],
+    "sampleAnswer": "가상 메모리는 실제 메모리보다 큰 주소 공간을 제공하기 위해 디스크를 사용하는 메모리 관리 기법입니다."
+  },
+  {
+    "id": 10,
+    "category": "CS",
+    "difficulty": "hard",
+    "question": "트랜잭션의 ACID 특성을 설명해주세요.",
+    "keyPoints": [
+      "Atomicity",
+      "Consistency",
+      "Isolation",
+      "Durability"
+    ],
+    "sampleAnswer": "ACID는 트랜잭션의 원자성, 일관성, 고립성, 지속성을 보장하는 특성입니다."
+  }
+]
