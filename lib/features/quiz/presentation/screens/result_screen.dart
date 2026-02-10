@@ -4,18 +4,39 @@ import '../../../../app/router.dart';
 
 class ResultScreen extends StatelessWidget {
   final List<QuizResult> results;
+  final String category;
 
-  const ResultScreen({super.key, required this.results});
+  const ResultScreen({
+    super.key,
+    required this.results,
+    required this.category,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('결과'),
+        title: Text('$category 결과'),
         automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [
+          // 요약
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              '총 ${results.length}문제 완료!',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+
           // 결과 리스트
           Expanded(
             child: ListView.separated(
@@ -57,11 +78,10 @@ class ResultScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
+                        Navigator.pushReplacementNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => const _RestartQuiz(),
-                          ),
+                          AppRoutes.quiz,
+                          arguments: category,
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -85,31 +105,22 @@ class ResultScreen extends StatelessWidget {
   }
 }
 
-// 다시 시험보기용 - QuizScreen을 새로 import하기 위한 래퍼
-class _RestartQuiz extends StatelessWidget {
-  const _RestartQuiz();
-
-  @override
-  Widget build(BuildContext context) {
-    // 지연 import 대신 라우트를 통해 재시작
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.pushReplacementNamed(context, AppRoutes.quiz);
-    });
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
-    );
-  }
-}
-
-class _ResultCard extends StatelessWidget {
+class _ResultCard extends StatefulWidget {
   final int index;
   final QuizResult result;
 
   const _ResultCard({required this.index, required this.result});
 
   @override
+  State<_ResultCard> createState() => _ResultCardState();
+}
+
+class _ResultCardState extends State<_ResultCard> {
+  bool _isExpanded = false;
+
+  @override
   Widget build(BuildContext context) {
-    final question = result.question;
+    final question = widget.result.question;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -121,32 +132,32 @@ class _ResultCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 헤더
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 14,
-                backgroundColor: Colors.black87,
-                child: Text(
-                  '${index + 1}',
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
+          InkWell(
+            onTap: () => setState(() => _isExpanded = !_isExpanded),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 14,
+                  backgroundColor: Colors.black87,
+                  child: Text(
+                    '${widget.index + 1}',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(6),
+                const SizedBox(width: 8),
+                _DifficultyBadge(difficulty: question.difficulty),
+                const Spacer(),
+                Icon(
+                  _isExpanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                  color: Colors.black54,
                 ),
-                child: Text(
-                  '${question.category} • ${question.difficulty}',
-                  style: const TextStyle(fontSize: 11, color: Colors.black54),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
           const SizedBox(height: 12),
 
@@ -155,55 +166,106 @@ class _ResultCard extends StatelessWidget {
             question.question,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
-          const SizedBox(height: 16),
 
-          // 내 답변
-          _Section(
-            icon: '✏️',
-            title: '내 답변',
-            content: result.userAnswer,
-            backgroundColor: Colors.blue.shade50,
-          ),
-          const SizedBox(height: 12),
+          if (_isExpanded) ...[
+            const SizedBox(height: 16),
 
-          // 모범 답안
-          _Section(
-            icon: '✅',
-            title: '모범 답안',
-            content: question.sampleAnswer,
-            backgroundColor: Colors.green.shade50,
-          ),
-          const SizedBox(height: 12),
-
-          // 키포인트
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.orange.shade50,
-              borderRadius: BorderRadius.circular(10),
+            // 내 답변
+            _Section(
+              icon: '✏️',
+              title: '내 답변',
+              content: widget.result.userAnswer,
+              backgroundColor: Colors.blue.shade50,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  '📌 키포인트',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(height: 6),
-                ...question.keyPoints.map(
-                  (point) => Padding(
-                    padding: const EdgeInsets.only(bottom: 3),
-                    child: Text(
-                      '• $point',
-                      style: const TextStyle(fontSize: 13),
+            const SizedBox(height: 12),
+
+            // 모범 답안
+            _Section(
+              icon: '✅',
+              title: '모범 답안',
+              content: question.sampleAnswer,
+              backgroundColor: Colors.green.shade50,
+            ),
+            const SizedBox(height: 12),
+
+            // 키포인트
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.orange.shade50,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '📌 키포인트',
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 6),
+                  ...question.keyPoints.map(
+                    (point) => Padding(
+                      padding: const EdgeInsets.only(bottom: 3),
+                      child: Text(
+                        '• $point',
+                        style: const TextStyle(fontSize: 13),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ],
+      ),
+    );
+  }
+}
+
+class _DifficultyBadge extends StatelessWidget {
+  final String difficulty;
+  const _DifficultyBadge({required this.difficulty});
+
+  Color get _color {
+    switch (difficulty) {
+      case 'easy':
+        return Colors.green;
+      case 'medium':
+        return Colors.orange;
+      case 'hard':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  String get _label {
+    switch (difficulty) {
+      case 'easy':
+        return '쉬움';
+      case 'medium':
+        return '보통';
+      case 'hard':
+        return '어려움';
+      default:
+        return difficulty;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: _color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: _color.withOpacity(0.3)),
+      ),
+      child: Text(
+        _label,
+        style:
+            TextStyle(fontSize: 11, color: _color, fontWeight: FontWeight.w600),
       ),
     );
   }

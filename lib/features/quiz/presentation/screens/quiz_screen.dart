@@ -17,11 +17,17 @@ class _QuizScreenState extends State<QuizScreen> {
   final _answerController = TextEditingController();
   final List<QuizResult> _results = [];
   bool _isLoading = true;
+  String _category = '';
 
   @override
-  void initState() {
-    super.initState();
-    _loadQuestions();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isLoading) {
+      final category =
+          ModalRoute.of(context)?.settings.arguments as String? ?? 'CS';
+      _category = category;
+      _loadQuestions(category);
+    }
   }
 
   @override
@@ -30,8 +36,9 @@ class _QuizScreenState extends State<QuizScreen> {
     super.dispose();
   }
 
-  Future<void> _loadQuestions() async {
-    final questions = await LocalQuestionSource().getAllQuestions();
+  Future<void> _loadQuestions(String category) async {
+    final questions =
+        await LocalQuestionSource().getQuestionsByCategory(category);
     setState(() {
       _questions = questions;
       _isLoading = false;
@@ -55,7 +62,10 @@ class _QuizScreenState extends State<QuizScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (_) => ResultScreen(results: _results),
+          builder: (_) => ResultScreen(
+            results: _results,
+            category: _category,
+          ),
         ),
       );
     }
@@ -73,7 +83,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('질문 ${_currentIndex + 1} / ${_questions.length}'),
+        title: Text('$_category ${_currentIndex + 1} / ${_questions.length}'),
       ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -95,14 +105,8 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
               const SizedBox(height: 20),
 
-              // 카테고리 + 난이도
-              Row(
-                children: [
-                  _Tag(label: question.category),
-                  const SizedBox(width: 8),
-                  _Tag(label: question.difficulty),
-                ],
-              ),
+              // 난이도
+              _DifficultyTag(difficulty: question.difficulty),
               const SizedBox(height: 12),
 
               // 질문
@@ -162,21 +166,49 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 }
 
-class _Tag extends StatelessWidget {
-  final String label;
-  const _Tag({required this.label});
+class _DifficultyTag extends StatelessWidget {
+  final String difficulty;
+  const _DifficultyTag({required this.difficulty});
+
+  Color get _color {
+    switch (difficulty) {
+      case 'easy':
+        return Colors.green;
+      case 'medium':
+        return Colors.orange;
+      case 'hard':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  String get _label {
+    switch (difficulty) {
+      case 'easy':
+        return '쉬움';
+      case 'medium':
+        return '보통';
+      case 'hard':
+        return '어려움';
+      default:
+        return difficulty;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: _color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: _color.withOpacity(0.3)),
       ),
       child: Text(
-        label,
-        style: const TextStyle(fontSize: 12, color: Colors.black54),
+        _label,
+        style:
+            TextStyle(fontSize: 12, color: _color, fontWeight: FontWeight.w600),
       ),
     );
   }
